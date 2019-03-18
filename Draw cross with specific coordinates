@@ -1,0 +1,26 @@
+void DrawObject(int x, int y, Mat frame)
+        {
+            //use some of the openCV drawing functions to draw crosshairs
+            //on your tracked image!
+
+            //UPDATE:JUNE 18TH, 2013
+            //added 'if' and 'else' statements to prevent
+            //memory errors from writing off the screen (ie. (-25,-25) is not within the window!)
+
+            CvInvoke.Circle(frame,new Point(x, y), 20, new MCvScalar(0, 255, 0), 2);
+            if (y - 25 > 0)
+                CvInvoke.Line(frame,new Point(x, y),new Point(x, y - 25),new  MCvScalar(0, 255, 0), 2);
+            else CvInvoke.Line(frame, new Point(x, y), new Point(x, 0),  new  MCvScalar(0, 255, 0), 2);
+            if (y + 25 < FRAME_HEIGHT)
+                CvInvoke.Line(frame, new Point(x, y), new Point(x, y + 25), new MCvScalar(0, 255, 0), 2);
+            else CvInvoke.Line(frame, new Point(x, y),new Point(x, FRAME_HEIGHT), new  MCvScalar(0, 255, 0), 2);
+            if (x - 25 > 0)
+                CvInvoke.Line(frame,new Point(x, y),new Point(x - 25, y),new  MCvScalar(0, 255, 0), 2);
+            else CvInvoke.Line(frame,new Point(x, y),new Point(0, y),new  MCvScalar(0, 255, 0), 2);
+            if (x + 25 < FRAME_WIDTH)
+                CvInvoke.Line(frame,new  Point(x, y), new Point(x + 25, y),new  MCvScalar(0, 255, 0), 2);
+            else CvInvoke.Line(frame,new  Point(x, y),new  Point(FRAME_WIDTH, y),new MCvScalar(0, 255, 0), 2);
+
+            CvInvoke.PutText(frame, x.ToString() + "," + y.ToString(), new Point(x, y + 30), FontFace.HersheySimplex, 1, new MCvScalar(0, 255, 0), 2);
+
+        }
